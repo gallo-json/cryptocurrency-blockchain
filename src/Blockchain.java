@@ -1,3 +1,4 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +14,12 @@ public class Blockchain {
     private Block getLatestBlock() {
         return blockchain.get(blockchain.size() - 1);
     }
+
+    public void addBlock(Data data) {
+        Block newBlock = new Block(blockchain.size(), data, getLatestBlock().getHash());
+        blockchain.add(newBlock);
+    }
+
     public void printAsString() {
         for (Block block : blockchain) {
             System.out.println(block.toString());
