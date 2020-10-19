@@ -1,4 +1,4 @@
-import java.time.Date;
+import java.util.Date;
 
 public class Data {
     private int amount;
@@ -13,7 +13,19 @@ public class Data {
         this.date = date;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getReciever() {
+        return reciever;
+    }
+
     public String getTimeStamp() {
-        return date;
+        return date.toString();
     }
 }
