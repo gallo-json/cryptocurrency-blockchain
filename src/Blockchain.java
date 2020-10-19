@@ -9,7 +9,10 @@ public class Blockchain {
         // Genesis block
         blockchain.add(new Block(0, new Data(0, "genesis", "genesis", new Date()), genesisHash));
     }
-
+    
+    private Block getLatestBlock() {
+        return blockchain.get(blockchain.size() - 1);
+    }
     public void printAsString() {
         for (Block block : blockchain) {
             System.out.println(block.toString());
