@@ -50,6 +50,16 @@ public class Block {
 
         System.out.println("Block mined: " + hash);
     } 
+    //TODO: fix isValid()
+
+    /*
+    public boolean hasValidTransactions() {
+        for (Transaction t : transactions) {
+            if (!t.isValid()) return true;
+        }
+        return false;
+    }
+    */
 
     public void setPreviousHash(byte[] previousHash) {
         this.previousHash = previousHash;

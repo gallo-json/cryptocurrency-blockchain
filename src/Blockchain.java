@@ -43,9 +43,19 @@ public class Blockchain {
         pendingTransactions.add(new Transaction(miningReward, "System", minerAddress));
     }
 
-    public void createTransaction(Transaction transaction) {
+    public void addTransaction(Transaction transaction) throws Exception {
+        if (transaction.getSender().length() == 0 || transaction.getReciever().length() == 0) {
+            throw new Exception("Transaction must have a to and from address");
+        }
+        //TODO: fix isValid()
+
+        /*
+        if (!transaction.isValid()) {
+            throw new Exception("Cannot add invalid transaction to block.");
+        }
+        */
         pendingTransactions.add(transaction);
-        //blockchain.add(new Block(transaction, getLatestBlock().getHash()));
+        blockchain.add(new Block(transaction, getLatestBlock().getHash()));
     }
 
     public int getBalance(String address) {
@@ -71,6 +81,14 @@ public class Blockchain {
                 System.out.println(e);
                 return false;
             }
+
+            //TODO: fix isValid()
+            /*
+            if (!currentBlock.hasValidTransactions()) {
+                System.out.println("Currupted tranactions!");
+                return false;
+            }
+            */
         }
         return true;
     }

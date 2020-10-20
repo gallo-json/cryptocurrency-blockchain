@@ -3,20 +3,22 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Transaction> sampleTransactions = new ArrayList<Transaction>();
-        sampleTransactions.add(new Transaction(10, "Tarek", "Jose"));
-        sampleTransactions.add(new Transaction(2, "Jose", "Tarek"));
-
         Blockchain pepegaCoin = new Blockchain();
-        pepegaCoin.createTransaction(new Transaction(10, "jose", "tarek"));
-        pepegaCoin.createTransaction(new Transaction(2, "tarek", "jose"));
-        pepegaCoin.printAsString();
 
-        System.out.println("mining block...");
-        pepegaCoin.minePendingTransactions("Sergei");
+        SigningKeys myKeys = new SigningKeys();
+        String myWalletAddress = myKeys.getPublicKeyString();
+        System.out.println("Your public key is: " + myWalletAddress);
+        try {
+            Transaction tx1 = new Transaction(10, myWalletAddress, "reciever public key");
+            tx1.signTransaction(myKeys);
+            pepegaCoin.addTransaction(tx1);
 
-        System.out.println("Sergei (miner) balance: " + pepegaCoin.getBalance("Sergei"));
+            System.out.println("Starting the miner...");
+            pepegaCoin.minePendingTransactions(myWalletAddress);
 
-        Key.generateKeys();
+            System.out.println("Balance of the miner is now " + pepegaCoin.getBalance(myWalletAddress));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
