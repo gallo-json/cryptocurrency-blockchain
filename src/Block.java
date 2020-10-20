@@ -1,20 +1,30 @@
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 public class Block {
+    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private int index;
-    private Data data;
-    private String timeStamp;
     private byte[] previousHash;
     private byte[] hash;
     private int nonce = 0;
 
-    public Block(int index, Data data, byte[] previousHash) {
+    public Block(int index, Transaction transaction, byte[] previousHash) {
         this.index = index;
-        this.data = data;
-        this.timeStamp = data.getTimeStamp();
+        transactions.add(transaction);
+        this.previousHash = previousHash;
+        try {
+            this.hash = calculateHash();
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println(e);
+        }
+    }
+
+    public Block(int index, ArrayList<Transaction> transactions, byte[] previousHash) {
+        this.index = index;
+        this.transactions = transactions;
         this.previousHash = previousHash;
         try {
             this.hash = calculateHash();
@@ -24,7 +34,8 @@ public class Block {
     }
 
     public byte[] calculateHash() throws NoSuchAlgorithmException {
-        return Hash.getSHA(index + Hash.toHexString(previousHash) + timeStamp + nonce + (data.getAmount() + data.getSender() + data.getReciever()));
+        return Hash.getSHA(index + Hash.toHexString(previousHash)+ nonce);
+        // + (transaction.getAmount() + transaction.getSender() + transaction.getReciever())
     }
 
     public void mineBlock(int difficulty) {
@@ -53,14 +64,18 @@ public class Block {
     public byte[] getHash() {
         return hash;
     }
+    
+    public void printAsString() {
+        System.out.println("BLOCK");
+        for (Transaction t : transactions) {
+            System.out.println("\tTRANSACTION");
+            System.out.println("\t\tAmount: " + t.getAmount());
+            System.out.println("\t\tSender: " + t.getSender());
+            System.out.println("\t\tReciever: " + t.getReciever());
+            System.out.println("\t\tTime stamp: " + t.getTimeStamp());
+        }
 
-    public Data getData() {
-        return data;
-    } 
-
-    @Override
-    public String toString() {
-        return String.format("Block %s:%n\t Amount: %s PepegaCoin%n\t Sender: %s%n\t Reciever: %s%n\t Timestamp: %s%n\t Previous hash: %s%n\t Hash: %s%n\t",
-                            index, data.getAmount(), data.getSender(), data.getReciever(), timeStamp, Hash.toHexString(previousHash), Hash.toHexString(hash));
+        System.out.println("\tPrevious hash: " + Hash.toHexString(previousHash));
+        System.out.println("\tHash: " + Hash.toHexString(hash));
     }
 }

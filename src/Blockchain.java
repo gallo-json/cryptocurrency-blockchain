@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class Blockchain {
-    ArrayList<Block> blockchain = new ArrayList<Block>();
+    private ArrayList<Block> blockchain = new ArrayList<Block>();
     private int difficulty = 5;
 
     public Blockchain() {
         byte[] genesisHash = new byte[0];
         // Genesis block
-        blockchain.add(new Block(0, new Data(0, "Genesis", "Genesis", new Date()), genesisHash));
+        blockchain.add(new Block(0, new Transaction(0, "Genesis", "Genesis", new Date()), genesisHash));
     }
 
     public Block getBlock(int i) {
@@ -21,8 +21,8 @@ public class Blockchain {
         return blockchain.get(blockchain.size() - 1);
     }
 
-    public void addBlock(Data data) {
-        Block newBlock = new Block(blockchain.size(), data, getLatestBlock().getHash());
+    public void addBlock(ArrayList<Transaction> transactions) {
+        Block newBlock = new Block(blockchain.size(), transactions, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
     }
@@ -45,7 +45,7 @@ public class Blockchain {
 
     public void printAsString() {
         for (Block block : blockchain) {
-            System.out.println(block.toString());
+            block.printAsString();
         }
     }
 }
