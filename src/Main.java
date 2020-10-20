@@ -1,5 +1,4 @@
 import java.util.Date;
-import java.util.Arrays;
 import java.util.ArrayList;
 
 public class Main {
@@ -9,7 +8,8 @@ public class Main {
         sampleTransactions.add(new Transaction(2, "Jose", "Tarek", new Date()));
 
         Blockchain pepegaCoin = new Blockchain();
-        pepegaCoin.addBlock(sampleTransactions);pepegaCoin.addBlock(sampleTransactions);
+        pepegaCoin.addBlock(sampleTransactions);
+        pepegaCoin.addBlock(sampleTransactions);
         pepegaCoin.printAsString();
     }
 }
