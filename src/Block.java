@@ -59,6 +59,9 @@ public class Block {
         this.hash = hash;
     }
 
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
     public byte[] getHash() {
         return hash;
     }

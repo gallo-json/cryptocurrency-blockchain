@@ -4,13 +4,12 @@ public class Transaction {
     private int amount;
     private String sender;
     private String reciever;
-    private Date date;
+    private Date date = new Date();
 
-    public Transaction(int amount, String sender, String reciever, Date date) {
+    public Transaction(int amount, String sender, String reciever) {
         this.amount = amount; 
         this.sender = sender;
         this.reciever = reciever;
-        this.date = date;
     }
 
     public void setAmount(int amount) {

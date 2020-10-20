@@ -7,12 +7,12 @@ public class Blockchain {
     private ArrayList<Block> blockchain = new ArrayList<Block>();
     private ArrayList<Transaction> pendingTransactions = new ArrayList<Transaction>();
     private int miningReward = 100;
-    private int difficulty = 2;
+    private int difficulty = 3;
 
     public Blockchain() {
         byte[] genesisHash = new byte[0];
         // Genesis block
-        blockchain.add(new Block(new Transaction(0, "Genesis", "Genesis", new Date()), genesisHash));
+        blockchain.add(new Block(new Transaction(0, "Genesis", "Genesis"), genesisHash));
     }
 
     public Block getBlock(int i) {
@@ -38,17 +38,26 @@ public class Blockchain {
     public void minePendingTransactions(String minerAddress) {
         Block minedBlock = new Block(pendingTransactions, getLatestBlock().getHash());
         minedBlock.mineBlock(difficulty);
-        System.out.println("Block successfully mined.")
-        blockchain.add(newBlock);
-        pendingTransactions.add(new Transaction(100, "System", minerAddress, new Date()));
+        System.out.println("Block successfully mined.");
+        blockchain.add(minedBlock);
+        pendingTransactions.add(new Transaction(miningReward, "System", minerAddress));
     }
 
     public void createTransaction(Transaction transaction) {
         pendingTransactions.add(transaction);
+        //blockchain.add(new Block(transaction, getLatestBlock().getHash()));
     }
 
-    public int getBalanceOf(String address) {
-        return 0;
+    public int getBalance(String address) {
+        int balance = 0;
+
+        for (Block block : blockchain) {
+            for (Transaction t : block.getTransactions()) {
+                if (t.getSender().equals(address)) balance -= t.getAmount();
+                if (t.getReciever().equals(address)) balance += t.getAmount();
+            }
+        }
+        return balance;
     }
 
     public boolean isChainValid() {
