@@ -5,7 +5,9 @@ import java.util.Date;
 
 public class Blockchain {
     private ArrayList<Block> blockchain = new ArrayList<Block>();
-    private int difficulty = 5;
+    private ArrayList<Transaction> pendingTransactions = new ArrayList<Transaction>();
+    private int miningReward = 100;
+    private int difficulty = 2;
 
     public Blockchain() {
         byte[] genesisHash = new byte[0];
@@ -31,6 +33,22 @@ public class Blockchain {
         Block newBlock = new Block(transactions, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
+    }
+
+    public void minePendingTransactions(String minerAddress) {
+        Block minedBlock = new Block(pendingTransactions, getLatestBlock().getHash());
+        minedBlock.mineBlock(difficulty);
+        System.out.println("Block successfully mined.")
+        blockchain.add(newBlock);
+        pendingTransactions.add(new Transaction(100, "System", minerAddress, new Date()));
+    }
+
+    public void createTransaction(Transaction transaction) {
+        pendingTransactions.add(transaction);
+    }
+
+    public int getBalanceOf(String address) {
+        return 0;
     }
 
     public boolean isChainValid() {
