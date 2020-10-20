@@ -10,7 +10,7 @@ public class Blockchain {
     public Blockchain() {
         byte[] genesisHash = new byte[0];
         // Genesis block
-        blockchain.add(new Block(0, new Transaction(0, "Genesis", "Genesis", new Date()), genesisHash));
+        blockchain.add(new Block(new Transaction(0, "Genesis", "Genesis", new Date()), genesisHash));
     }
 
     public Block getBlock(int i) {
@@ -22,13 +22,13 @@ public class Blockchain {
     }
 
     public void addBlock(Transaction transaction) {
-        Block newBlock = new Block(blockchain.size(), transaction, getLatestBlock().getHash());
+        Block newBlock = new Block(transaction, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
     }
 
     public void addBlock(ArrayList<Transaction> transactions) {
-        Block newBlock = new Block(blockchain.size(), transactions, getLatestBlock().getHash());
+        Block newBlock = new Block(transactions, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
     }

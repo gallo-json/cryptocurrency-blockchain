@@ -6,13 +6,11 @@ import java.util.Date;
 
 public class Block {
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-    private int index;
     private byte[] previousHash;
     private byte[] hash;
     private int nonce = 0;
 
-    public Block(int index, Transaction transaction, byte[] previousHash) {
-        this.index = index;
+    public Block(Transaction transaction, byte[] previousHash) {
         transactions.add(transaction);
         this.previousHash = previousHash;
         try {
@@ -22,8 +20,7 @@ public class Block {
         }
     }
 
-    public Block(int index, ArrayList<Transaction> transactions, byte[] previousHash) {
-        this.index = index;
+    public Block(ArrayList<Transaction> transactions, byte[] previousHash) {
         this.transactions = transactions;
         this.previousHash = previousHash;
         try {
@@ -34,7 +31,7 @@ public class Block {
     }
 
     public byte[] calculateHash() throws NoSuchAlgorithmException {
-        String stringToHash = index + Hash.toHexString(previousHash) + nonce;
+        String stringToHash = Hash.toHexString(previousHash) + nonce;
         for (Transaction t : transactions) stringToHash += (t.getAmount() + t.getSender() + t.getReciever() + t.getTimeStamp());
         return Hash.getSHA(stringToHash);
     }

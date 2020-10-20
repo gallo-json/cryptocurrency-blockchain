@@ -9,7 +9,7 @@ public class Main {
         sampleTransactions.add(new Transaction(2, "Jose", "Tarek", new Date()));
 
         Blockchain pepegaCoin = new Blockchain();
-        pepegaCoin.addBlock(sampleTransactions);
+        pepegaCoin.addBlock(sampleTransactions);pepegaCoin.addBlock(sampleTransactions);
         pepegaCoin.printAsString();
     }
 }
