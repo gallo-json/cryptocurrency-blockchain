@@ -1,5 +1,6 @@
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Blockchain {
@@ -10,6 +11,10 @@ public class Blockchain {
         // Genesis block
         blockchain.add(new Block(0, new Data(0, "genesis", "genesis", new Date()), genesisHash));
     }
+
+    public Block getBlock(int i) {
+        return blockchain.get(i);
+    }
     
     private Block getLatestBlock() {
         return blockchain.get(blockchain.size() - 1);
@@ -18,6 +23,22 @@ public class Blockchain {
     public void addBlock(Data data) {
         Block newBlock = new Block(blockchain.size(), data, getLatestBlock().getHash());
         blockchain.add(newBlock);
+    }
+
+    public boolean isChainValid() {
+        for (int i = 1; i < blockchain.size(); i++) {
+            Block currentBlock = blockchain.get(i);
+            Block previousBlock = blockchain.get(i - 1);
+            
+            try {
+                if (!Arrays.equals(currentBlock.getHash(), currentBlock.calculateHash()) || !Arrays.equals(previousBlock.getHash(), previousBlock.calculateHash())) return false;
+            } catch (NoSuchAlgorithmException e) {
+                //TODO: handle exception
+                System.out.println(e);
+                return false;
+            }
+        }
+        return true;
     }
 
     public void printAsString() {

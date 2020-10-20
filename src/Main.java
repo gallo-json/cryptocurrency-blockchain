@@ -6,5 +6,11 @@ public class Main {
         pepegaCoin.addBlock(new Data(10, "Jose", "Tarek", new Date()));
         pepegaCoin.addBlock(new Data(2, "Tarek", "Sergei", new Date()));
         pepegaCoin.printAsString();
+        System.out.println(pepegaCoin.isChainValid());
+
+        // Tampering
+        pepegaCoin.getBlock(1).setData(new Data(1000, "Jose", "Tarek", new Date()));
+        pepegaCoin.printAsString();
+        System.out.println(pepegaCoin.isChainValid());
     }
 }

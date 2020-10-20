@@ -13,6 +13,18 @@ public class Data {
         this.date = date;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void getSender(String sender) {
+        this.sender = sender;
+    }
+
+    public void getReciever(String reciever) {
+        this.reciever = reciever;
+    }
+
     public int getAmount() {
         return amount;
     }

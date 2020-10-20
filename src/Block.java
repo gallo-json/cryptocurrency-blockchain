@@ -47,6 +47,15 @@ public class Block {
         return hash;
     }
 
+    // Test tampering purposes
+    public void setData(Data data) {
+        this.data = data;
+    }
+
+    public Data getData() {
+        return data;
+    } 
+
     @Override
     public String toString() {
         return String.format("Block %s:%n\t Amount: %s PepegaCoin%n\t Sender: %s%n\t Reciever: %s%n\t Timestamp: %s%n\t Previous hash: %s%n\t Hash: %s%n\t",
