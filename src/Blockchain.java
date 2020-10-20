@@ -21,6 +21,12 @@ public class Blockchain {
         return blockchain.get(blockchain.size() - 1);
     }
 
+    public void addBlock(Transaction transaction) {
+        Block newBlock = new Block(blockchain.size(), transaction, getLatestBlock().getHash());
+        newBlock.mineBlock(difficulty);
+        blockchain.add(newBlock);
+    }
+
     public void addBlock(ArrayList<Transaction> transactions) {
         Block newBlock = new Block(blockchain.size(), transactions, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
@@ -35,7 +41,6 @@ public class Blockchain {
             try {
                 if (!Arrays.equals(currentBlock.getHash(), currentBlock.calculateHash()) || !Arrays.equals(previousBlock.getHash(), previousBlock.calculateHash())) return false;
             } catch (NoSuchAlgorithmException e) {
-                //TODO: handle exception
                 System.out.println(e);
                 return false;
             }

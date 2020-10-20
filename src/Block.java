@@ -34,7 +34,7 @@ public class Block {
     }
 
     public byte[] calculateHash() throws NoSuchAlgorithmException {
-        String stringToHash = index + Hash.toHexString(previousHash)+ nonce;
+        String stringToHash = index + Hash.toHexString(previousHash) + nonce;
         for (Transaction t : transactions) stringToHash += (t.getAmount() + t.getSender() + t.getReciever() + t.getTimeStamp());
         return Hash.getSHA(stringToHash);
     }
