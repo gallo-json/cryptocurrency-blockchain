@@ -24,8 +24,7 @@ public class Transaction {
     public void setReciever(String reciever) {
         this.reciever = reciever;
     }
-
-
+    
     public int getAmount() {
         return amount;
     }

@@ -34,8 +34,9 @@ public class Block {
     }
 
     public byte[] calculateHash() throws NoSuchAlgorithmException {
-        return Hash.getSHA(index + Hash.toHexString(previousHash)+ nonce);
-        // + (transaction.getAmount() + transaction.getSender() + transaction.getReciever())
+        String stringToHash = index + Hash.toHexString(previousHash)+ nonce;
+        for (Transaction t : transactions) stringToHash += (t.getAmount() + t.getSender() + t.getReciever() + t.getTimeStamp());
+        return Hash.getSHA(stringToHash);
     }
 
     public void mineBlock(int difficulty) {
@@ -64,7 +65,7 @@ public class Block {
     public byte[] getHash() {
         return hash;
     }
-    
+
     public void printAsString() {
         System.out.println("BLOCK");
         for (Transaction t : transactions) {
@@ -76,6 +77,6 @@ public class Block {
         }
 
         System.out.println("\tPrevious hash: " + Hash.toHexString(previousHash));
-        System.out.println("\tHash: " + Hash.toHexString(hash));
+        System.out.println("\tHash: " + Hash.toHexString(hash) + "\n");
     }
 }
