@@ -5,11 +5,12 @@ import java.util.Date;
 
 public class Blockchain {
     ArrayList<Block> blockchain = new ArrayList<Block>();
+    private int difficulty = 5;
 
     public Blockchain() {
         byte[] genesisHash = new byte[0];
         // Genesis block
-        blockchain.add(new Block(0, new Data(0, "genesis", "genesis", new Date()), genesisHash));
+        blockchain.add(new Block(0, new Data(0, "Genesis", "Genesis", new Date()), genesisHash));
     }
 
     public Block getBlock(int i) {
@@ -22,6 +23,7 @@ public class Blockchain {
 
     public void addBlock(Data data) {
         Block newBlock = new Block(blockchain.size(), data, getLatestBlock().getHash());
+        newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
     }
 
