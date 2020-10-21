@@ -51,7 +51,6 @@ public class Blockchain {
             throw new Exception("Cannot add invalid transaction to block.");
         }
         pendingTransactions.add(transaction);
-        //blockchain.add(new Block(transaction, getLatestBlock().getHash()));
     }
 
     public int getBalance(String address) {
@@ -72,7 +71,15 @@ public class Blockchain {
             Block previousBlock = blockchain.get(i - 1);
             
             try {
-                if (!Arrays.equals(currentBlock.getHash(), currentBlock.calculateHash()) || !Arrays.equals(previousBlock.getHash(), previousBlock.calculateHash())) return false;
+                if (!Arrays.equals(currentBlock.getHash(), currentBlock.calculateHash())) {
+                    System.out.println("cock");
+                    return false;
+                }
+
+                if (!Arrays.equals(previousBlock.getHash(), previousBlock.calculateHash())) {
+                    System.out.println("cocks");
+                    return false;
+                }
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e);
                 return false;

@@ -37,7 +37,7 @@ public class Transaction {
         }
     }
 
-    public boolean isValid() throws SignatureException {
+    public boolean isValid() {
         try {
             if (sender.equals("System")) return true;
 
@@ -45,6 +45,7 @@ public class Transaction {
 
             return signingKeys.received(signature);
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
@@ -75,5 +76,15 @@ public class Transaction {
 
     public String getTimeStamp() {
         return date.toString();
+    }
+
+    public void printAsString() {
+        System.out.println("From: " + sender);
+        System.out.println("From: " + reciever);
+        System.out.println("Amount " + amount);
+        System.out.println("Time stamp " + date.toString());
+
+        System.out.println("Valid: " + isValid());
+
     }
 }
