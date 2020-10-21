@@ -19,6 +19,7 @@ public class Transaction {
     public byte[] calculateHash() throws NoSuchAlgorithmException {
         return Hash.getSHA(sender + reciever + amount);
     }
+    /*
 
     public void signTransaction(SigningKeys signingKeys) throws SignatureException {
         try {
@@ -33,6 +34,7 @@ public class Transaction {
             System.out.println(e);
         }
     }
+    
 
     public boolean isValid(SigningKeys signingKeys) throws SignatureException {
         if (sender.equals("System")) return true;
@@ -41,6 +43,7 @@ public class Transaction {
 
         return signingKeys.recieved();
     }
+    */
     public void setAmount(int amount) {
         this.amount = amount;
     }

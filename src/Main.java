@@ -5,9 +5,18 @@ public class Main {
     public static void main(String[] args) {
         Blockchain pepegaCoin = new Blockchain();
 
-        SigningKeys myKeys = new SigningKeys();
-        String myWalletAddress = myKeys.getPublicKeyString();
-        System.out.println("Your public key is: " + myWalletAddress);
+        
+            try {
+                SigningKeys digiSig = new SigningKeys();
+                String[] obj = digiSig.sender("nice cock");
+                boolean result = digiSig.receiver(obj);
+                System.out.println(result);
+            } catch (Exception ex) {
+                System.out.println(ex);
+            } 
+        
+
+        /*
         try {
             Transaction tx1 = new Transaction(10, myWalletAddress, "reciever public key");
             tx1.signTransaction(myKeys);
@@ -20,5 +29,6 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
+        */
     }
 }
