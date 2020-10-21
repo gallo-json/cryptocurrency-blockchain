@@ -55,4 +55,12 @@ public class SigningKeys {
 
         return result;
     }
+    
+    public String toString(PrivateKey key) {
+        return Base64.getEncoder().encodeToString(key.getEncoded());
+    }
+    
+    public String toString(PublicKey key) {
+        return Base64.getEncoder().encodeToString(key.getEncoded());
+    }
 }

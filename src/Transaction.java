@@ -1,14 +1,15 @@
 import java.util.Date;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
+import java.security.KeyPair;
 
 public class Transaction {
     private int amount;
     private String sender;
     private String reciever;
     private Date date = new Date();
-    private String signature;
+    private String[] signature;
+    private SigningKeys signingKeys;
 
     public Transaction(int amount, String sender, String reciever) {
         this.amount = amount; 
@@ -19,31 +20,35 @@ public class Transaction {
     public byte[] calculateHash() throws NoSuchAlgorithmException {
         return Hash.getSHA(sender + reciever + amount);
     }
-    /*
 
-    public void signTransaction(SigningKeys signingKeys) throws SignatureException {
+    public void signTransaction(SigningKeys signingKeys, KeyPair keyPair) throws SignatureException {
+        this.signingKeys = signingKeys;
+
         try {
             String transactionHash = Hash.toHexString(calculateHash());
 
-            if (!signingKeys.getPublicKeyString().equals(sender)) {
+            if (!signingKeys.toString(keyPair.getPublic()).equals(sender)) {
                 throw new SignatureException("You cannot sign transactions from other wallets!");
             }
     
-            signature = signingKeys.sign(transactionHash);
-        } catch (NoSuchAlgorithmException e) {
+            signature = signingKeys.sign(transactionHash, keyPair);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
 
-    public boolean isValid(SigningKeys signingKeys) throws SignatureException {
-        if (sender.equals("System")) return true;
+    public boolean isValid() throws SignatureException {
+        try {
+            if (sender.equals("System")) return true;
 
-        if (signature.length() == 0) throw new SignatureException("There is no signature in this transaction!");
+            if (signature.length == 0) throw new SignatureException("No signature in this transaction");
 
-        return signingKeys.recieved();
+            return signingKeys.received(signature);
+        } catch (Exception e) {
+            return false;
+        }
     }
-    */
+
     public void setAmount(int amount) {
         this.amount = amount;
     }

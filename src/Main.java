@@ -4,8 +4,15 @@ import java.security.KeyPair;
 
 public class Main {
     public static void main(String[] args) {
-        Blockchain pepegaCoin = new Blockchain();
+        try {
+            Blockchain pepegaCoin = new Blockchain();
+            SigningKeys signingKeys = new SigningKeys();
+            KeyPair myKeys = signingKeys.generate();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
+        /*
         try {
             SigningKeys signingKeys = new SigningKeys();
             KeyPair myKeys = signingKeys.generate();
@@ -16,18 +23,7 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e);
         }
-
-        /*
-            try {
-                SigningKeys digiSig = new SigningKeys();
-                String[] obj = digiSig.sender("nice cock");
-                boolean result = digiSig.receiver(obj);
-                System.out.println(result);
-            } catch (Exception ex) {
-                System.out.println(ex);
-            } 
         */
-
         /*
         try {
             Transaction tx1 = new Transaction(10, myWalletAddress, "reciever public key");
