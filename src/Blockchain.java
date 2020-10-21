@@ -51,7 +51,7 @@ public class Blockchain {
             throw new Exception("Cannot add invalid transaction to block.");
         }
         pendingTransactions.add(transaction);
-        blockchain.add(new Block(transaction, getLatestBlock().getHash()));
+        //blockchain.add(new Block(transaction, getLatestBlock().getHash()));
     }
 
     public int getBalance(String address) {
