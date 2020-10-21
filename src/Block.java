@@ -88,6 +88,7 @@ public class Block {
         }
 
         System.out.println("\tPrevious hash: " + Hash.toHexString(previousHash));
-        System.out.println("\tHash: " + Hash.toHexString(hash) + "\n");
+        System.out.println("\tHash: " + Hash.toHexString(hash));
+        System.out.println("\tNonce: " + nonce + "\n");
     }
 }

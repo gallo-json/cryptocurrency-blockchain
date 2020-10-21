@@ -79,12 +79,13 @@ public class Transaction {
     }
 
     public void printAsString() {
-        System.out.println("From: " + sender);
-        System.out.println("From: " + reciever);
-        System.out.println("Amount " + amount);
-        System.out.println("Time stamp " + date.toString());
+        System.out.println("TRANSACTION OVERVIEW");
+        System.out.println("\tFrom: " + sender);
+        System.out.println("\tTo: " + reciever);
+        System.out.println("\tAmount: " + amount);
+        System.out.println("\tTimestamp: " + date.toString());
 
-        System.out.println("Valid: " + isValid());
+        System.out.println("\tValid: " + isValid());
 
     }
 }

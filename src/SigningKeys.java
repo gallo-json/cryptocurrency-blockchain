@@ -33,7 +33,7 @@ public class SigningKeys {
         byte[] signature = ecdsaSign.sign();
         String pub = Base64.getEncoder().encodeToString(publicKey.getEncoded());
         String sig = Base64.getEncoder().encodeToString(signature);
-        System.out.println("Signature " + sig);
+        System.out.println("Signature: " + sig);
 
         String[] obj = {pub, sig, message, ALGO};
 
@@ -55,7 +55,7 @@ public class SigningKeys {
 
         return result;
     }
-    
+
     public String toString(PrivateKey key) {
         return Base64.getEncoder().encodeToString(key.getEncoded());
     }
