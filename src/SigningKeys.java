@@ -1,19 +1,6 @@
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SecureRandom;
-import java.security.Signature;
-import java.security.SignatureException;
-import java.security.spec.ECGenParameterSpec;
-import java.security.spec.EncodedKeySpec;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.X509EncodedKeySpec;
+import java.security.*;
+import java.security.spec.*;
 import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,8 +9,7 @@ public class SigningKeys {
     private static final String SPEC = "secp256k1";
     private static final String ALGO = "SHA256withECDSA";
 
-    public String[] sender(String message) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, UnsupportedEncodingException, SignatureException {
-
+    public KeyPair generate() throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, UnsupportedEncodingException, SignatureException{
         ECGenParameterSpec ecSpec = new ECGenParameterSpec(SPEC);
         KeyPairGenerator g = KeyPairGenerator.getInstance("EC");
         g.initialize(ecSpec, new SecureRandom());
@@ -31,6 +17,15 @@ public class SigningKeys {
         PublicKey publicKey = keypair.getPublic();
         PrivateKey privateKey = keypair.getPrivate();
 
+        System.out.println("Public: " + Base64.getEncoder().encodeToString(publicKey.getEncoded()));
+        System.out.println("Private: " + Base64.getEncoder().encodeToString(privateKey.getEncoded()));
+
+        return keypair;
+    }
+
+    public String[] sign(String message, KeyPair keyPair) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, UnsupportedEncodingException, SignatureException {
+        PublicKey publicKey = keyPair.getPublic();
+        PrivateKey privateKey = keyPair.getPrivate();
         //...... sign
         Signature ecdsaSign = Signature.getInstance(ALGO);
         ecdsaSign.initSign(privateKey);
@@ -38,16 +33,14 @@ public class SigningKeys {
         byte[] signature = ecdsaSign.sign();
         String pub = Base64.getEncoder().encodeToString(publicKey.getEncoded());
         String sig = Base64.getEncoder().encodeToString(signature);
-        System.out.println(sig);
-        System.out.println(pub);
+        System.out.println("Signature " + sig);
 
         String[] obj = {pub, sig, message, ALGO};
 
         return obj;
     }
 
-    public boolean receiver(String[] obj) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, UnsupportedEncodingException, SignatureException {
-
+    public boolean received(String[] obj) throws NoSuchAlgorithmException, InvalidKeySpecException, InvalidKeyException, UnsupportedEncodingException, SignatureException {
         Signature ecdsaVerify = Signature.getInstance(obj[3]);
         KeyFactory kf = KeyFactory.getInstance("EC");
 

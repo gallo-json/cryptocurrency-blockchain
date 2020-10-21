@@ -1,11 +1,23 @@
 import java.util.Date;
 import java.util.ArrayList;
+import java.security.KeyPair;
 
 public class Main {
     public static void main(String[] args) {
         Blockchain pepegaCoin = new Blockchain();
 
-        
+        try {
+            SigningKeys signingKeys = new SigningKeys();
+            KeyPair myKeys = signingKeys.generate();
+
+            String[] obj = signingKeys.sign("nice cock", myKeys);
+            System.out.println(signingKeys.received(obj));
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        /*
             try {
                 SigningKeys digiSig = new SigningKeys();
                 String[] obj = digiSig.sender("nice cock");
@@ -14,7 +26,7 @@ public class Main {
             } catch (Exception ex) {
                 System.out.println(ex);
             } 
-        
+        */
 
         /*
         try {
