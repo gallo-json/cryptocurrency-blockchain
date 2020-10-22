@@ -40,7 +40,7 @@ public class Main {
                 System.out.println("Make another transaction (b)");
                 System.out.println("View blockchain (c)");
                 System.out.println("View your balance (d)");
-                System.out.println("Quit blockchain (q)")
+                System.out.println("Quit blockchain (q)");
                 System.out.print("Your choice: "); char choice = input.next().charAt(0);
                 
                 switch (choice) {
