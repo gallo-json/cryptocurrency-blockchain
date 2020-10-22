@@ -30,6 +30,8 @@ public class Main {
                 pepegaCoin.addTransaction(tx);
                 tx.printAsString();  
                 System.out.println();   
+            } else {
+                System.out.println("Transaction cancelled.\n");
             }
 
             while (true) {
@@ -38,6 +40,7 @@ public class Main {
                 System.out.println("Make another transaction (b)");
                 System.out.println("View blockchain (c)");
                 System.out.println("View your balance (d)");
+                System.out.println("Quit blockchain (q)")
                 System.out.print("Your choice: "); char choice = input.next().charAt(0);
                 
                 switch (choice) {
@@ -61,6 +64,8 @@ public class Main {
                             pepegaCoin.addTransaction(tx);
                             tx.printAsString();  
                             System.out.println();  
+                        } else {
+                            System.out.println("Transaction cancelled.\n");
                         }
                         break;
                     case 'c':
@@ -71,7 +76,11 @@ public class Main {
                         System.out.println("\nYour balance: " + pepegaCoin.getBalance(myWalletAddress));
                         System.out.println();
                         break;
+                    case 'q':
+                        System.out.print("Quitting...");
+                        System.exit(0);
                     default:
+                        System.out.println("That is not a valid option.\n");
                         break;
                 }
             }
