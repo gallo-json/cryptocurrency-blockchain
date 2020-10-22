@@ -71,15 +71,9 @@ public class Blockchain {
             Block previousBlock = blockchain.get(i - 1);
             
             try {
-                if (!Arrays.equals(currentBlock.getHash(), currentBlock.calculateHash())) {
-                    System.out.println("cock");
-                    return false;
-                }
+                if (!Arrays.equals(currentBlock.getHash(), currentBlock.calculateHash())) return false;
 
-                if (!Arrays.equals(previousBlock.getHash(), previousBlock.calculateHash())) {
-                    System.out.println("cocks");
-                    return false;
-                }
+                if (!Arrays.equals(previousBlock.getHash(), previousBlock.calculateHash())) return false;
             } catch (NoSuchAlgorithmException e) {
                 System.out.println(e);
                 return false;

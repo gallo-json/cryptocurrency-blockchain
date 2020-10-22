@@ -84,7 +84,6 @@ public class Transaction {
         System.out.println("\tTo: " + reciever);
         System.out.println("\tAmount: " + amount);
         System.out.println("\tTimestamp: " + date.toString());
-
         System.out.println("\tValid: " + isValid());
 
     }
