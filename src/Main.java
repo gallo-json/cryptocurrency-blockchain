@@ -62,7 +62,7 @@ public class Main {
                             tx.signTransaction(signingKeys, myKeys);
                             System.out.println();
                             pepegaCoin.addTransaction(tx);
-                            tx.printAsString();  
+                            tx.printAsString(); 
                             System.out.println();  
                         } else {
                             System.out.println("Transaction cancelled.\n");
@@ -70,7 +70,7 @@ public class Main {
                         break;
                     case 'c':
                         System.out.println();
-                        pepegaCoin.printAsString();
+                        pepegaCoin.printAsString(); 
                         break;
                     case 'd':
                         System.out.println("\nYour balance: " + pepegaCoin.getBalance(myWalletAddress));
