@@ -6,8 +6,8 @@ import java.util.Date;
 public class Blockchain {
     private ArrayList<Block> blockchain = new ArrayList<Block>();
     private ArrayList<Transaction> pendingTransactions = new ArrayList<Transaction>();
-    private int miningReward = 100;
-    private int difficulty = 5;
+    private static final int miningReward = 100;
+    private static final int difficulty = 5;
 
     public Blockchain() {
         byte[] genesisHash = new byte[0];
