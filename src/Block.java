@@ -20,8 +20,8 @@ public class Block {
         }
     }
 
-    public Block(ArrayList<Transaction> transactions, byte[] previousHash) {
-        this.transactions = transactions;
+    public Block(ArrayList<Transaction> t, byte[] previousHash) {
+        transactions.addAll(t);
         this.previousHash = previousHash;
         try {
             this.hash = calculateHash();

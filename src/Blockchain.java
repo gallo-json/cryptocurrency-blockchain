@@ -41,10 +41,8 @@ public class Blockchain {
         Transaction reward = new Transaction(miningReward, "System", minerAddress);
         pendingTransactions.add(reward);
 
-        Block block = new Block(pendingTransactions, getLatestBlock().getHash());
-        block.mineBlock(difficulty);
-
-        blockchain.add(block);
+        addBlock(pendingTransactions);
+        pendingTransactions.clear();
     }
 
     public void addTransaction(Transaction transaction) throws Exception {
