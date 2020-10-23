@@ -71,6 +71,7 @@ public class Main {
                     case 'c':
                         System.out.println();
                         pepegaCoin.printAsString(); 
+                        System.out.println("Chain valid: " + pepegaCoin.isChainValid() + "\n");
                         break;
                     case 'd':
                         System.out.println("\nYour balance: " + pepegaCoin.getBalance(myWalletAddress));

@@ -7,7 +7,7 @@ public class Blockchain {
     private ArrayList<Block> blockchain = new ArrayList<Block>();
     private ArrayList<Transaction> pendingTransactions = new ArrayList<Transaction>();
     private static final int miningReward = 100;
-    private static final int difficulty = 7;
+    private static final int difficulty = 5;
 
     public Blockchain() {
         byte[] genesisHash = new byte[0];
@@ -23,14 +23,14 @@ public class Blockchain {
         return blockchain.get(blockchain.size() - 1);
     }
 
-    public void addBlock(Transaction transaction) {
+    private void addBlock(Transaction transaction) {
         Block newBlock = new Block(transaction, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
         
     }
 
-    public void addBlock(ArrayList<Transaction> transactions) {
+    private void addBlock(ArrayList<Transaction> transactions) {
         Block newBlock = new Block(transactions, getLatestBlock().getHash());
         newBlock.mineBlock(difficulty);
         blockchain.add(newBlock);
@@ -93,9 +93,5 @@ public class Blockchain {
         for (Block block : blockchain) {
             block.printAsString();
         }
-    }
-
-    public void clearTransactions() {
-        blockchain.clear();
     }
 }
