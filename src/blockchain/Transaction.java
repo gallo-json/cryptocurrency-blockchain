@@ -1,3 +1,5 @@
+package blockchain;
+
 import java.util.Date;
 import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;

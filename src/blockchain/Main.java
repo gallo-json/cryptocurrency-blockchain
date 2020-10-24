@@ -1,3 +1,5 @@
+package blockchain;
+
 import java.util.Date;
 import java.util.Scanner;
 import java.security.KeyPair;
@@ -78,7 +80,7 @@ public class Main {
                         System.out.println();
                         break;
                     case 'q':
-                        System.out.print("Quitting...");
+                        System.out.println("Quitting...");
                         System.exit(0);
                     default:
                         System.out.println("That is not a valid option.\n");
