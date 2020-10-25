@@ -9,7 +9,7 @@ public class PeerThread extends Thread {
     private BufferedReader bufferedReader;
 
     public PeerThread(Socket socket) throws IOException {
-        bufferedReader = new BufferedReader(new InputSteamReader(socket.getInputStream()));
+        bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     }
 
     public void run() {
