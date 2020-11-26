@@ -3,6 +3,10 @@ Simple blockchain for the PepegaCoin cryptocurrency, using no external libraries
 
 Has a CLI do create transactions, mine blocks, check balance, etc.
 
+## How to run
+
+`./gradlew run --console plain`
+
 ## Class Diagram
 
 ![diagram](class-diagram.jpg)
