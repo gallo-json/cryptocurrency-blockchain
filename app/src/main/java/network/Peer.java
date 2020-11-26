@@ -5,7 +5,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class Peer {
-    public static void main(String [] args) throws IOException {
+    public static void start() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username and port for this peer: ");
         String[] setupValues = bufferedReader.readLine().split(" ");

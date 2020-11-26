@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.security.KeyPair;
 
-public class App {
+public class Miner {
     public static void main(String[] args) {
         try {
             Blockchain pepegaCoin = new Blockchain();

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import javax.json.*;
 
 public class Block {
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
@@ -92,5 +93,22 @@ public class Block {
         System.out.println("\tPrevious hash: " + Hash.toHexString(previousHash));
         System.out.println("\tHash: " + Hash.toHexString(hash));
         System.out.println("\tNonce: " + nonce + "\n");
+    }
+
+    public JsonObject getJSON() {
+        JsonObject obj = Json.createObjectBuilder().build();
+
+        for (Transaction t : transactions) {
+            obj = JsonUtils.append(obj, "amount", Integer.toString(t.getAmount()));
+            obj = JsonUtils.append(obj, "sender", t.getSender());
+            obj = JsonUtils.append(obj, "reciever", t.getReciever());
+            obj = JsonUtils.append(obj, "time stamp", t.getTimeStamp());
+        }
+
+        obj = JsonUtils.append(obj, "previous hash", Hash.toHexString(previousHash));
+        obj = JsonUtils.append(obj, "hash", Hash.toHexString(hash));
+        obj = JsonUtils.append(obj, "nonce", Integer.toString(nonce));
+
+        return obj;
     }
 }
