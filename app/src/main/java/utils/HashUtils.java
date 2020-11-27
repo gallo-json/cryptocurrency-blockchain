@@ -23,5 +23,16 @@ public class HashUtils {
 	        hexString.append(hex);
 	    }
 	    return hexString.toString();
-    } 
+	} 
+	
+	public static byte[] toByteArray(String hexString) {
+		byte[] val = new byte[hexString.length() / 2];
+		for (int i = 0; i < val.length; i++) {
+		   int index = i * 2;
+		   int j = Integer.parseInt(hexString.substring(index, index + 2), 16);
+		   val[i] = (byte) j;
+		}
+
+		return val;
+	}
 }

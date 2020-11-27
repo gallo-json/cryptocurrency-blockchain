@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 import javax.json.*;
 import javax.json.stream.*;
+import blockchain.core.*;
 
 public class JsonUtils {
     public static JsonObject append(JsonObject source, String key, String value) {
@@ -35,4 +36,10 @@ public class JsonUtils {
         }
         return sw.toString();
     }
+
+    /*
+    public static Block toBlock(JsonObject jsonBlock) {
+
+    }
+    */
 }

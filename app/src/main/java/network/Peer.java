@@ -6,32 +6,32 @@ import java.net.*;
 import java.util.Scanner;
 
 public class Peer {
-    private int port;
+    private int startingPort = 3000;
     private String name;
     private boolean receiver;
     private ServerThread serverThread;
 
-    public Peer(int port, String name, boolean receiver) throws IOException {
-        this.port = port;
+    public Peer(String name, boolean receiver) throws IOException {
         this.name = name;
         this.receiver = receiver;
 
         while (true) {
             try {
-                serverThread = new ServerThread(port);
+                serverThread = new ServerThread(startingPort);
                 serverThread.start();
                 break;
             } catch (BindException e) {
-                port++;
+                startingPort++;
             }
         }
+
+        System.out.println("Your port: " + startingPort);
 
         try {
             updateListenToPeers();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("Your port: " + port);
     }
 
     private void updateListenToPeers() throws Exception {

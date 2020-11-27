@@ -14,8 +14,8 @@ public class Miner extends Peer {
     private KeyPair myKeys;
     private String myWalletAddress;
 
-    public Miner(int port, String name, boolean receiver) throws Exception {
-        super(port, name, receiver);
+    public Miner(String name, boolean receiver) throws Exception {
+        super(name, receiver);
         pepegaCoin = new Blockchain();
         signingKeys = new SigningKeys();
         

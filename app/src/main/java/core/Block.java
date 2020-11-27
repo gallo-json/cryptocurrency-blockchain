@@ -35,6 +35,12 @@ public class Block {
         }
     }
 
+    public Block(ArrayList<Transaction> t, byte[] previousHash, byte[] hash) {
+        transactions.addAll(t);
+        this.previousHash = previousHash;
+        this.hash = hash;
+    }
+
     public byte[] calculateHash() throws NoSuchAlgorithmException {
         String stringToHash = HashUtils.toHexString(previousHash) + nonce;
         for (Transaction t : transactions) stringToHash += (t.getAmount() + t.getSender() + t.getReciever() + t.getTimeStamp());
