@@ -21,7 +21,7 @@ public class Blockchain {
         return blockchain.get(i);
     }
     
-    private Block getLatestBlock() {
+    public Block getLatestBlock() {
         return blockchain.get(blockchain.size() - 1);
     }
 

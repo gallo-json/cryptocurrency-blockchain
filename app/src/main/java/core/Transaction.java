@@ -5,6 +5,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SignatureException;
 import java.security.KeyPair;
 
+import blockchain.utils.HashUtils;
+
 public class Transaction {
     private int amount;
     private String sender;
@@ -20,14 +22,14 @@ public class Transaction {
     }
 
     public byte[] calculateHash() throws NoSuchAlgorithmException {
-        return Hash.getSHA(sender + reciever + amount);
+        return HashUtils.getSHA(sender + reciever + amount);
     }
 
     public void signTransaction(SigningKeys signingKeys, KeyPair keyPair) throws SignatureException {
         this.signingKeys = signingKeys;
 
         try {
-            String transactionHash = Hash.toHexString(calculateHash());
+            String transactionHash = HashUtils.toHexString(calculateHash());
 
             if (!signingKeys.toString(keyPair.getPublic()).equals(sender)) {
                 throw new SignatureException("You cannot sign transactions from other wallets!");

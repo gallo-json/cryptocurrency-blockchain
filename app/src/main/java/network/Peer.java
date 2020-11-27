@@ -3,6 +3,7 @@ package blockchain.network;
 import javax.json.*;
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class Peer {
     private int port;

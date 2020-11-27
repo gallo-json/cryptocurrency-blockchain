@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.Scanner;
 import java.security.KeyPair;
 
+import blockchain.core.*;
+import blockchain.network.Peer;
+
 public class Miner extends Peer {
     private Blockchain pepegaCoin;
     private SigningKeys signingKeys;
@@ -11,7 +14,8 @@ public class Miner extends Peer {
     private KeyPair myKeys;
     private String myWalletAddress;
 
-    public Miner() {
+    public Miner(int port, String name, boolean receiver) throws Exception {
+        super(port, name, receiver);
         pepegaCoin = new Blockchain();
         signingKeys = new SigningKeys();
         
@@ -24,7 +28,6 @@ public class Miner extends Peer {
 
         myWalletAddress = signingKeys.toString(myKeys.getPublic());
 
-        super(3000, myWalletAddress, false);
     }
 
     public void start() {

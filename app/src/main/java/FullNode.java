@@ -1,7 +1,9 @@
 package blockchain;
 
+import blockchain.network.Peer;
+
 public class FullNode extends Peer {
-    public FullNode() {
-        super(3001, "fullnode", true);
+    public FullNode(int port, String name, boolean receiver) throws Exception {
+        super(port, name, receiver);
     }
 }

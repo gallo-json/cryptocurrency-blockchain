@@ -1,4 +1,4 @@
-package blochain.network;
+package blockchain.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;
