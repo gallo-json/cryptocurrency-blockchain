@@ -1,4 +1,4 @@
-package network;
+package blockchain.network;
 
 import java.net.Socket;
 import java.io.*;

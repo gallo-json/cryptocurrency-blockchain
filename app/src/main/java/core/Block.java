@@ -1,4 +1,4 @@
-package blockchain;
+package blockchain.core;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Collections;

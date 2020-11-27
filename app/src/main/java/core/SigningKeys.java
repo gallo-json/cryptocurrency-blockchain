@@ -1,4 +1,4 @@
-package blockchain;
+package blockchain.core;
 
 import java.io.UnsupportedEncodingException;
 import java.security.*;

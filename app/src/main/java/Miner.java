@@ -4,21 +4,31 @@ import java.util.Date;
 import java.util.Scanner;
 import java.security.KeyPair;
 
-public class Miner {
-    public static void main(String[] args) {
+public class Miner extends Peer {
+    private Blockchain pepegaCoin;
+    private SigningKeys signingKeys;
+    private Scanner input = new Scanner(System.in);
+    private KeyPair myKeys;
+    private String myWalletAddress;
+
+    public Miner() {
+        pepegaCoin = new Blockchain();
+        signingKeys = new SigningKeys();
+        
+        input.useDelimiter("\n");
+
+        System.out.println("Your designated public and private keys. Do not share your private key with anyone!");
+        myKeys = signingKeys.generate();
+
+        System.out.println();
+
+        myWalletAddress = signingKeys.toString(myKeys.getPublic());
+
+        super(3000, myWalletAddress, false);
+    }
+
+    public void start() {
         try {
-            Blockchain pepegaCoin = new Blockchain();
-            SigningKeys signingKeys = new SigningKeys();
-            Scanner input = new Scanner(System.in);
-            input.useDelimiter("\n");
-
-            System.out.println("Your designated public and private keys. Do not share your private key with anyone!");
-            KeyPair myKeys = signingKeys.generate();
-
-            System.out.println();
-    
-            String myWalletAddress = signingKeys.toString(myKeys.getPublic());
-            
             System.out.println("Creating transaction...");
             System.out.println("Sender: " + myWalletAddress + " (this is your address)");
             System.out.print("Reciever: "); String receiver = input.nextLine();
@@ -50,6 +60,7 @@ public class Miner {
                         System.out.println("\nStarting the miner...");
                         pepegaCoin.minePendingTransactions(myWalletAddress);
                         System.out.println();
+                        super.send(pepegaCoin.getLatestBlock().getJSON());
                         break;
                     case 'b':
                         System.out.println("Creating transaction...");

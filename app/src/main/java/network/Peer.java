@@ -1,73 +1,57 @@
-package network;
+package blockchain.network;
 
 import javax.json.*;
 import java.io.*;
 import java.net.Socket;
 
 public class Peer {
-    private boolean trigger = false;
+    private int port;
+    private String name;
+    private boolean receiver;
     private ServerThread serverThread;
-    public Peer() throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Enter username and port for this peer: ");
-        String[] setupValues = bufferedReader.readLine().split(" ");
-        serverThread = new ServerThread(Integer.valueOf(setupValues[1]));
+
+    public Peer(int port, String name, boolean receiver) throws IOException {
+        this.port = port;
+        this.name = name;
+        this.receiver = receiver;
+
+        serverThread = new ServerThread(port);
         serverThread.start();
         try {
-            updateListenToPeers(bufferedReader, setupValues[0], serverThread);
+            updateListenToPeers();
         } catch (Exception e) {
             e.printStackTrace();
         }
         
     }
 
-    public void updateListenToPeers(BufferedReader bufferedReader, String username, ServerThread serverThread) throws Exception {
-        System.out.println("Enter hostname:port");
-        System.out.println("Peers to receive messages from (s to skip): ");
-        String input = bufferedReader.readLine();
-        String[] inputValues = input.split(" ");
+    private void updateListenToPeers() throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        if (receiver) {
+            System.out.println("Enter hostname:port for peers to receive data from (separated by a space):");
+            String[] inputValues = scanner.nextLine().split(" ");
 
-        if (!input.equals("s")) for (int i = 0; i < inputValues.length; i++) {
-            String[] address = inputValues[i].split(":");
-            Socket socket = null;
+            for (int i = 0; i < inputValues.length; i++) {
+                String[] address = inputValues[i].split(":");
+                Socket socket = null;
 
-            try {
-                socket = new Socket(address[0], Integer.valueOf(address[1]));
-                new PeerThread(socket).start();
-            } catch (Exception e) {
-                if (socket != null) socket.close();
-                else System.out.println("Invalid input.");
+                try {
+                    socket = new Socket(address[0], Integer.valueOf(address[1]));
+                    new PeerThread(socket).start();
+                } catch (Exception e) {
+                    if (socket != null) socket.close();
+                    else System.out.println("Invalid input.");
+                }
             }
         }
-        //communicate(bufferedReader, username, serverThread);
+
+        System.out.println("Can now communicate with other peers");
     }
-/*
-    public void communicate(BufferedReader bufferedReader, String username, ServerThread serverThread) {
-        try {
-            System.out.println("Can now communicate (e to exit, c to change)");
-            boolean flag = true;
-            while (flag) {
-                
-                String message = bufferedReader.readLine();
-                if (message.equals("e")) {
-                    flag = false;
-                    break;
-                } else if (message.equals("c")) {
-                    updateListenToPeers(bufferedReader, username, serverThread);
-                } else { 
-                   
-            
-            //System.exit(0);
-        } catch (Exception e) {
-            //TODO: handle exception
-            e.printStackTrace();
-        }
-    }
- */
-    public void send(JsonObject data) {
+
+    protected void send(JsonObject data) {
         StringWriter stringWriter = new StringWriter();
         Json.createWriter(stringWriter).writeObject(Json.createObjectBuilder()
-            .add("miner", "jsee")
+            .add("miner", name)
             .add("block", Json.createObjectBuilder(data))
         .build());
 

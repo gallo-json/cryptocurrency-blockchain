@@ -1,4 +1,4 @@
-package network;
+package blochain.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;

@@ -1,11 +1,11 @@
-package blockchain;
+package blockchain.utils;
 
 import java.math.BigInteger;  
 import java.nio.charset.StandardCharsets; 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Hash {
+public class HashUtils {
     public static byte[] getSHA(String input) throws NoSuchAlgorithmException {  
         // Static getInstance method is called with hashing SHA  
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
