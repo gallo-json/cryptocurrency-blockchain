@@ -14,7 +14,7 @@ public class Main {
             miner.start();
         }
         else if (choice == 'f') {
-            FullNode fullNode = new FullNode(3001, "full node", true);
+            FullNode fullNode = new FullNode(3000, "full node", true);
         }
 
     }

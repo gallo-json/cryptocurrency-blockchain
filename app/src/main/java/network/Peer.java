@@ -2,7 +2,7 @@ package blockchain.network;
 
 import javax.json.*;
 import java.io.*;
-import java.net.Socket;
+import java.net.*;
 import java.util.Scanner;
 
 public class Peer {
@@ -16,14 +16,22 @@ public class Peer {
         this.name = name;
         this.receiver = receiver;
 
-        serverThread = new ServerThread(port);
-        serverThread.start();
+        while (true) {
+            try {
+                serverThread = new ServerThread(port);
+                serverThread.start();
+                break;
+            } catch (BindException e) {
+                port++;
+            }
+        }
+
         try {
             updateListenToPeers();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+        System.out.println("Your port: " + port);
     }
 
     private void updateListenToPeers() throws Exception {

@@ -27,7 +27,7 @@ public class Miner extends Peer {
         System.out.println();
 
         myWalletAddress = signingKeys.toString(myKeys.getPublic());
-
+        super.send(pepegaCoin.getBlock(0).getJSON());
     }
 
     public void start() {
