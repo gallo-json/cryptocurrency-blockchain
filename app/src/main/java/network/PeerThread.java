@@ -18,8 +18,7 @@ public class PeerThread extends Thread {
         while (flag) {
             try {
                 JsonObject jsonObject = Json.createReader(bufferedReader).readObject();
-                if (jsonObject.containsKey("username"))
-                    System.out.println("[" + jsonObject.getString("username") + "]: " + jsonObject.getString("message"));
+                System.out.println(jsonObject.toString());
 
             } catch (Exception e) {
                 flag = false;

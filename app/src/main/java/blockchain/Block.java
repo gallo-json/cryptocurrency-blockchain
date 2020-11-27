@@ -101,7 +101,7 @@ public class Block {
         for (Transaction t : transactions) {
             obj = JsonUtils.append(obj, "amount", Integer.toString(t.getAmount()));
             obj = JsonUtils.append(obj, "sender", t.getSender());
-            obj = JsonUtils.append(obj, "reciever", t.getReciever());
+            obj = JsonUtils.append(obj, "receiver", t.getReciever());
             obj = JsonUtils.append(obj, "time stamp", t.getTimeStamp());
         }
 

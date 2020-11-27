@@ -5,14 +5,16 @@ import java.io.*;
 import java.net.Socket;
 
 public class Peer {
-    public static void start() throws IOException {
+    private boolean trigger = false;
+    private ServerThread serverThread;
+    public Peer() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter username and port for this peer: ");
         String[] setupValues = bufferedReader.readLine().split(" ");
-        ServerThread serverThread = new ServerThread(setupValues[1]);
+        serverThread = new ServerThread(Integer.valueOf(setupValues[1]));
         serverThread.start();
         try {
-            new Peer().updateListenToPeers(bufferedReader, setupValues[0], serverThread);
+            updateListenToPeers(bufferedReader, setupValues[0], serverThread);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,34 +39,38 @@ public class Peer {
                 else System.out.println("Invalid input.");
             }
         }
-        communicate(bufferedReader, username, serverThread);
+        //communicate(bufferedReader, username, serverThread);
     }
-
+/*
     public void communicate(BufferedReader bufferedReader, String username, ServerThread serverThread) {
         try {
             System.out.println("Can now communicate (e to exit, c to change)");
             boolean flag = true;
             while (flag) {
+                
                 String message = bufferedReader.readLine();
                 if (message.equals("e")) {
                     flag = false;
                     break;
                 } else if (message.equals("c")) {
                     updateListenToPeers(bufferedReader, username, serverThread);
-                } else {
-                    StringWriter stringWriter = new StringWriter();
-                    Json.createWriter(stringWriter).writeObject(Json.createObjectBuilder()
-                    .add("username", username)
-                    .add("message", message)
-                    .build());
-
-                    serverThread.sendMessage(stringWriter.toString());
-                }
-            }
-            System.exit(0);
+                } else { 
+                   
+            
+            //System.exit(0);
         } catch (Exception e) {
             //TODO: handle exception
             e.printStackTrace();
         }
+    }
+ */
+    public void send(JsonObject data) {
+        StringWriter stringWriter = new StringWriter();
+        Json.createWriter(stringWriter).writeObject(Json.createObjectBuilder()
+            .add("miner", "jsee")
+            .add("block", Json.createObjectBuilder(data))
+        .build());
+
+        serverThread.sendMessage(stringWriter.toString());
     }
 }
