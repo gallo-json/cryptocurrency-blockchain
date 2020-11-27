@@ -16,5 +16,6 @@ public class Main {
         else if (choice == 'f') {
             FullNode fullNode = new FullNode(3001, "full node", true);
         }
+
     }
 }

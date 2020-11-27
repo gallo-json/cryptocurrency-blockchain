@@ -2,8 +2,9 @@ package blockchain.network;
 
 import java.io.*;
 import java.net.Socket;
-
 import javax.json.*;
+
+import blockchain.utils.JsonUtils;
 
 public class PeerThread extends Thread {
     private BufferedReader bufferedReader;
@@ -18,7 +19,7 @@ public class PeerThread extends Thread {
         while (flag) {
             try {
                 JsonObject jsonObject = Json.createReader(bufferedReader).readObject();
-                System.out.println(jsonObject.toString());
+                System.out.println(JsonUtils.toString(jsonObject));
 
             } catch (Exception e) {
                 flag = false;

@@ -100,16 +100,19 @@ public class Block {
     public JsonObject getJSON() {
         JsonObject obj = Json.createObjectBuilder().build();
 
-        for (Transaction t : transactions) {
-            obj = JsonUtils.append(obj, "amount", Integer.toString(t.getAmount()));
-            obj = JsonUtils.append(obj, "sender", t.getSender());
-            obj = JsonUtils.append(obj, "receiver", t.getReciever());
-            obj = JsonUtils.append(obj, "time stamp", t.getTimeStamp());
-        }
-
         obj = JsonUtils.append(obj, "previous hash", HashUtils.toHexString(previousHash));
         obj = JsonUtils.append(obj, "hash", HashUtils.toHexString(hash));
         obj = JsonUtils.append(obj, "nonce", Integer.toString(nonce));
+
+        for (int t = transactions.size() - 1; t >= 0; t--) {
+            JsonObjectBuilder currentTransaction = Json.createObjectBuilder()
+                .add("amount", Integer.toString(transactions.get(t).getAmount()))
+                .add("sender", transactions.get(t).getSender())
+                .add("receiver", transactions.get(t).getReciever())
+                .add("time stamp", transactions.get(t).getTimeStamp());
+            
+            obj = JsonUtils.append(obj, "transaction " + Integer.valueOf(t), currentTransaction);
+        }
 
         return obj;
     }
