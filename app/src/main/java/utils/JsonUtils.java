@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.*;
 import javax.json.*;
 import javax.json.stream.*;
+import java.text.*;
+
 import blockchain.core.*;
 
 public class JsonUtils {
@@ -37,9 +39,27 @@ public class JsonUtils {
         return sw.toString();
     }
 
-    /*
-    public static Block toBlock(JsonObject jsonBlock) {
 
+    public static Block toBlock(JsonObject jsonBlock) throws Exception {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+
+        byte[] previousHash = HashUtils.toByteArray(jsonBlock.getJsonObject("block").getString("previous hash"));
+        byte[] hash = HashUtils.toByteArray(jsonBlock.getJsonObject("block").getString("hash"));
+        int nonce = Integer.valueOf(jsonBlock.getJsonObject("block").getString("nonce"));
+
+        JsonObject transactionsJson = jsonBlock.getJsonObject("block").getJsonObject("transactions");
+
+        for (int i = 1; i <= transactionsJson.size(); i++) {
+            JsonObject currentTransaction = transactionsJson.getJsonObject("transaction " + Integer.valueOf(i));
+
+            DateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
+            Date date =  df.parse(currentTransaction.getString("time stamp"));  
+
+            transactions.add(new Transaction(Integer.valueOf(currentTransaction.getString("amount")), currentTransaction.getString("sender"),
+                                            currentTransaction.getString("receiver"), date));
+        }
+
+        return new Block(transactions, previousHash, hash, nonce);
     }
-    */
+
 }

@@ -21,6 +21,12 @@ public class Transaction {
         this.reciever = reciever;
     }
 
+    public Transaction(int amount, String sender, String reciever, Date date) {
+        this.amount = amount; 
+        this.sender = sender;
+        this.reciever = reciever;
+    }
+
     public byte[] calculateHash() throws NoSuchAlgorithmException {
         return HashUtils.getSHA(sender + reciever + amount);
     }

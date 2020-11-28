@@ -35,10 +35,11 @@ public class Block {
         }
     }
 
-    public Block(ArrayList<Transaction> t, byte[] previousHash, byte[] hash) {
+    public Block(ArrayList<Transaction> t, byte[] previousHash, byte[] hash, int nonce) {
         transactions.addAll(t);
         this.previousHash = previousHash;
         this.hash = hash;
+        this.nonce = nonce;
     }
 
     public byte[] calculateHash() throws NoSuchAlgorithmException {

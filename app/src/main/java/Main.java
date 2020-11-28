@@ -4,7 +4,7 @@ import javax.json.*;
 import java.util.Scanner;
 import java.net.InetAddress;
 
-import blockchain.utils.HashUtils;
+import blockchain.utils.*;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -22,22 +22,25 @@ public class Main {
             FullNode fullNode = new FullNode(name, true);
         }
         */
-        String string = "hello";
-        byte[] sha = HashUtils.getSHA("hello");
+        JsonObject data = Json.createObjectBuilder()
+            .add("miner", "jose")
+            .add("block", Json.createObjectBuilder()
+                .add("transactions", Json.createObjectBuilder()
+                    .add("transaction 1", Json.createObjectBuilder()
+                        .add("amount", "100")
+                        .add("sender", "system")
+                        .add("receiver", "jose")
+                        .add("time stamp", "nov 27 2020"))
+                    .add("transaction 2", Json.createObjectBuilder()
+                        .add("amount", "8")
+                        .add("sender", "jose")
+                        .add("receiver", "juan")
+                        .add("time stamp", "Nov 28 2020")))
+                .add("previous hash", "slalakjkldfjklajkl00")
+                .add("hash", "sa;dkakskdkkksa")
+                .add("nonce", "1342"))
+        .build();
 
-        for (byte b : sha) {
-            System.out.print(b);
-        }
-        System.out.println();
-
-        String shaHex = HashUtils.toHexString(sha);
-        System.out.println(shaHex);
-
-        byte[] backToSha = HashUtils.toByteArray(shaHex);
-
-        for (byte b : backToSha) {
-            System.out.print(b);
-        }
-
+        System.out.println(JsonUtils.toString(data));
     }
 }

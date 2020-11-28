@@ -39,6 +39,10 @@ public class Blockchain {
         
     }
 
+    public void addBroadcastedBlock(Block block) {
+        blockchain.add(block);
+    }
+
     public void minePendingTransactions(String minerAddress) {
         Transaction reward = new Transaction(miningReward, "System", minerAddress);
         pendingTransactions.add(reward);
