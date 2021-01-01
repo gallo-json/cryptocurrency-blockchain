@@ -1,17 +1,38 @@
-## Blockchain in Java
-Simple blockchain for the PepegaCoin cryptocurrency, using no external libraries. Only on one end, though. No p2p network yet.
+# Basic Blockchain Cryptocurrency Implementation in Java
 
-Has a CLI do create transactions, mine blocks, check balance, etc.
+Based on the Bitcoin blockchain.
+
+## Functionality
+
+### Keys
+
+- secp256k1 key cryptography
+- SHA256withECDSA transaction signature algorithm
+
+### Comand-line interface to:
+
+- Be either a miner or just a listening node
+- Mine the pending transactions into a block
+- Make a tranaction
+- View blockchain
+- View your balance
+
+### Blockchain
+
+- Blocks are stored in an `ArrayList`
+- Blocks hashed with SHA256 algorithm
+
+### Peer to peer network
+
+- Only localhost
+- Can connect and listen to other peers, assigning you a port
+- Miners can broadcast newly mined blocks to other nodes (only full nodes, not other miners, for now)
 
 ## How to run
 
 `./gradlew run --console plain`
 
-## Class Diagram
-
-![diagram](class-diagram.jpg)
-
 ## Future functionality
 
-- Add a peer-to-peer network
-- Store transactions in a database rather than an ArrayList.
+- Store transactions in a database rather than an `ArrayList`
+- Miners can broadcast to other miners (listening from the receiving miner is what I was having trouble with)
