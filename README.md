@@ -1,6 +1,6 @@
 # Blockchain for a Cryptocurrency
 
-A blockchain implementation in Java for a cryptocurrency. The blockchain is modeled after the Bitcoin chain.
+A blockchain implementation in Java for a cryptocurrency. The blockchain is modeled after the Bitcoin.
 
 ## Date
 
@@ -18,8 +18,7 @@ It is a command line interface over the blockchain to:
 
 ## Tech Stack
 
-- Java Programming Language
-- Java OOP (inheritance)
+- Java Programming Language & OOP (inheritance)
 - Gradle
 
 ## Specs
@@ -49,4 +48,8 @@ I tried to make this cryptocurrency as robust to my abilities. This included sig
 
 ## Useful links
 
-Useful tutorials that helped guide me 
+Useful links that helped guide me:
+
+- [Bitcoin repository](https://github.com/bitcoin/bitcoin)
+- [Simple Blockcain in JS](https://github.com/Savjee/SavjeeCoin)
+- [Java P2P demonstration](https://www.youtube.com/watch?v=CcLOj3uhb0A)
