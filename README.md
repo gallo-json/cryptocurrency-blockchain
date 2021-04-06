@@ -1,30 +1,45 @@
-# Basic Blockchain Cryptocurrency Implementation in Java
+# Blockchain for a Cryptocurrency
 
-Based on the Bitcoin blockchain.
+A blockchain implementation in Java for a cryptocurrency. The blockchain is modeled after the Bitcoin chain.
 
-## Functionality
+## Date
+
+Late October of 2020. 10th grade.
+
+## How does it work?
+
+It is a command line interface over the blockchain to:
+
+- Be either a miner or just a listening node (pulling the blockchain real time, but not mining)
+- Mine the pending transactions into a block
+- Make a transaction
+- View blockchain
+- View your balance
+
+## Tech Stack
+
+- Java Programming Language
+- Java OOP (inheritance)
+- Gradle
+
+## Specs
+
+I tried to make this cryptocurrency as robust to my abilities. This included signing transactions, validating blocks in a chain, and a basic P2P network.
 
 ### Keys
 
 - secp256k1 key cryptography
 - SHA256withECDSA transaction signature algorithm
 
-### Comand-line interface to:
-
-- Be either a miner or just a listening node
-- Mine the pending transactions into a block
-- Make a tranaction
-- View blockchain
-- View your balance
-
 ### Blockchain
 
 - Blocks are stored in an `ArrayList`
 - Blocks hashed with SHA256 algorithm
+- Blocks mined like in Bitcoin (specified number of zeros at the beginning of hash)
 
 ### Peer to peer network
 
-- Only localhost
+- Only on LAN (localhost)
 - Can connect and listen to other peers, assigning you a port
 - Miners can broadcast newly mined blocks to other nodes (only full nodes, not other miners, for now)
 
@@ -32,7 +47,6 @@ Based on the Bitcoin blockchain.
 
 `./gradlew run --console plain`
 
-## Future functionality
+## Useful links
 
-- Store transactions in a database rather than an `ArrayList`
-- Miners can broadcast to other miners (listening from the receiving miner is what I was having trouble with)
+Useful tutorials that helped guide me 
