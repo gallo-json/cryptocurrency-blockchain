@@ -1,6 +1,6 @@
 # Blockchain for a Cryptocurrency
 
-A blockchain implementation in Java for a cryptocurrency. The blockchain is modeled after the Bitcoin.
+A blockchain implementation in Java for a cryptocurrency. The blockchain is modeled after Bitcoin.
 
 ## Date
 
